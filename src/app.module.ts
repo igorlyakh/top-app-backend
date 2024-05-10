@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
@@ -7,7 +8,13 @@ import { ReviewModule } from './review/review.module';
 import { TopPageModule } from './top-page/top-page.module';
 
 @Module({
-	imports: [AuthModule, TopPageModule, ProductModule, ReviewModule],
+	imports: [
+		ConfigModule.forRoot(),
+		AuthModule,
+		TopPageModule,
+		ProductModule,
+		ReviewModule,
+	],
 	controllers: [AppController],
 	providers: [AppService],
 })
