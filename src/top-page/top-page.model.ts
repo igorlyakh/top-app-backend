@@ -49,10 +49,10 @@ export class TopPageModel {
 	@Prop()
 	category: string;
 
-	@Prop({ _id: false, type: () => HhData })
+	@Prop({ _id: false, type: HhData })
 	hh?: HhData;
 
-	@Prop({ type: () => [TopPageAdvantages], _id: false })
+	@Prop({ type: [TopPageAdvantages], _id: false })
 	advantages: TopPageAdvantages[];
 
 	@Prop()

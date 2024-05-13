@@ -46,7 +46,7 @@ export class ProductModel {
 	@Prop([String])
 	tags: string[];
 
-	@Prop({ _id: false, type: () => [ProductCharacteristic] })
+	@Prop({ _id: false, type: [ProductCharacteristic] })
 	characteristics: ProductCharacteristic[];
 }
 
