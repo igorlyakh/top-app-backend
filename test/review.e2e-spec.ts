@@ -4,6 +4,7 @@ import { Types, disconnect } from 'mongoose';
 import { CreateReviewDto } from 'src/review/dto/createReview.dto';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
+import { REVIEW_NOT_FOUND } from '../src/review/review.constants';
 
 const productId = new Types.ObjectId().toHexString();
 
@@ -39,7 +40,7 @@ describe('AppController (e2e)', () => {
 			});
 	});
 
-	it('/review/byProduct/:productId (GET)', async () => {
+	it('/review/byProduct/:productId (GET) GOOD', async () => {
 		return request(app.getHttpServer())
 			.get('/review/byProduct/' + productId)
 			.expect(200)
@@ -48,10 +49,28 @@ describe('AppController (e2e)', () => {
 			});
 	});
 
-	it('/review/:id (DELETE)', () => {
+	it('/review/byProduct/:productId (GET) BAD', async () => {
+		return request(app.getHttpServer())
+			.get('/review/byProduct/' + new Types.ObjectId().toHexString())
+			.expect(200)
+			.then(({ body }: request.Response) => {
+				expect(body.length).toBe(0);
+			});
+	});
+
+	it('/review/:id (DELETE) GOOD', () => {
 		return request(app.getHttpServer())
 			.delete('/review/' + createdId)
 			.expect(200);
+	});
+
+	it('/review/:id (DELETE) BAD', () => {
+		return request(app.getHttpServer())
+			.delete('/review/' + new Types.ObjectId().toHexString())
+			.expect(404, {
+				statusCode: 404,
+				message: REVIEW_NOT_FOUND,
+			});
 	});
 
 	afterAll(() => {
