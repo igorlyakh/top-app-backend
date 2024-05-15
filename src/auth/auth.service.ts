@@ -13,7 +13,7 @@ export class AuthService {
 
 	async createUser(dto: AuthDto) {
 		const passwordHash = await hash(dto.password, 10);
-		const newUser = { email: dto.login, passwordHash };
+		const newUser = { email: dto.email, passwordHash };
 		return this.authModel.create(newUser);
 	}
 
