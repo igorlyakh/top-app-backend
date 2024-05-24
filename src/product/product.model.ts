@@ -11,7 +11,7 @@ class ProductCharacteristic {
 	value: string;
 }
 
-@Schema({ timestamps: true, versionKey: false, _id: true })
+@Schema({ timestamps: true, versionKey: false })
 export class ProductModel {
 	@Prop()
 	image: string;
