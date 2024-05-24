@@ -15,7 +15,6 @@ import { IdValidationPipe } from 'src/pipes/idValidation.pipe';
 import { CreateProductDto } from './dto/createProduct.dto';
 import { FindProductDto } from './dto/findProduct.dto';
 import { PRODUCT_NOT_FOUND_ERROR } from './product.constants';
-import { ProductModel } from './product.model';
 import { ProductService } from './product.service';
 
 @Controller('product')
@@ -49,7 +48,7 @@ export class ProductController {
 	@Patch(':id')
 	async patch(
 		@Param('id', IdValidationPipe) id: string,
-		@Body() dto: ProductModel,
+		@Body() dto: CreateProductDto,
 	) {
 		const updatedProduct = await this.productService.updateById(id, dto);
 		if (!updatedProduct) {
