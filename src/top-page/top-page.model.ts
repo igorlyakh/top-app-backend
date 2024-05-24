@@ -10,6 +10,7 @@ export enum TopLevelCategory {
 	Products,
 }
 
+@Schema({ _id: true })
 export class HhData {
 	@Prop()
 	count: number;
@@ -24,6 +25,7 @@ export class HhData {
 	seniorSalary: number;
 }
 
+@Schema({ _id: true })
 export class TopPageAdvantages {
 	@Prop()
 	title: string;
@@ -32,7 +34,7 @@ export class TopPageAdvantages {
 	description: string;
 }
 
-@Schema({ timestamps: true, versionKey: false, _id: true })
+@Schema({ timestamps: true, versionKey: false })
 export class TopPageModel {
 	@Prop({ enum: TopLevelCategory })
 	firstCategory: TopLevelCategory;
@@ -49,10 +51,10 @@ export class TopPageModel {
 	@Prop()
 	category: string;
 
-	@Prop({ _id: false, type: HhData })
+	@Prop({ type: HhData })
 	hh?: HhData;
 
-	@Prop({ type: [TopPageAdvantages], _id: false })
+	@Prop({ type: [TopPageAdvantages] })
 	advantages: TopPageAdvantages[];
 
 	@Prop()
