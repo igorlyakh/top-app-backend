@@ -37,8 +37,14 @@ export class TopPageController {
 		return topPage;
 	}
 
+	@HttpCode(204)
 	@Delete(':id')
-	async delete(@Param('id', IdValidationPipe) id: string) {}
+	async delete(@Param('id', IdValidationPipe) id: string) {
+		const deletedTopPage = await this.topPageService.deleteById(id);
+		if (!deletedTopPage) {
+			throw new NotFoundException(TOP_PAGE_NOT_FOUND);
+		}
+	}
 
 	@Patch(':id')
 	async patch(
