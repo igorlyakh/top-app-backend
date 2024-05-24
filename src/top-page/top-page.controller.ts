@@ -50,7 +50,13 @@ export class TopPageController {
 	async patch(
 		@Param('id', IdValidationPipe) id: string,
 		@Body() dto: TopPageModel,
-	) {}
+	) {
+		const updatedTopPage = await this.topPageService.updateById(id, dto);
+		if (!updatedTopPage) {
+			throw new NotFoundException(TOP_PAGE_NOT_FOUND);
+		}
+		return updatedTopPage;
+	}
 
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
