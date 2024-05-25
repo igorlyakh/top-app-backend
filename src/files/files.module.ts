@@ -8,6 +8,7 @@ import { FilesService } from './files.service';
 	imports: [
 		ServeStaticModule.forRoot({
 			rootPath: `${path}/uploads`,
+			serveRoot: '/static',
 		}),
 	],
 	controllers: [FilesController],
